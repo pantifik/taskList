@@ -3,6 +3,18 @@ header {
 	font-size: 24px;
 }
 
+.comleted, .del {
+	
+}
+
 .completed-task {
 	text-decoration: line-through;
+}
+
+li .btn-group {
+	display: none;
+}
+
+li:hover .btn-group {
+	display: inline-block;
 }
