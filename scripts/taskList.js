@@ -18,12 +18,9 @@ taskManager();
 					}
 				]*/
 
-	
+var taskArray;
 
-
-	var taskArray;
-
-	if (localStorage.taskArray) {
+	if (localStorage.taskArray != "undefined") {
 
 		taskArray = JSON.parse(localStorage.taskArray);
 
@@ -81,9 +78,9 @@ taskManager();
  
  		var a;
     if (attr) {
-      a = "<li class=\"" + attr + "\">" + value + "<br><div class=\"btn-group\"><button class=\"completed btn btn-default btn-xs\">Готово</button><button class=\"del btn btn-default btn-xs\">Удалить</button></div></li>";
+      a = "<li class=\"" + attr + "\">" + value + "<br><div class=\"btn-group\"><button class=\"completed btn btn-default btn-xs\"><span class=\"glyphicon glyphicon-ok\"></span> Выполнено</button><button class=\"del btn btn-default btn-xs\"><span class=\"glyphicon glyphicon-remove\"></span> Удалить</button></div></li>";
     }else{
-    	a = "<li>" + value + "<br><button class=\"completed btn btn-default btn-xs\">Готово</button><button class=\"del btn btn-default btn-xs\">Удалить</button></li>";
+    	a = "<li>" + value + "<br><div class=\"btn-group\"><button class=\"completed btn btn-default btn-xs\"><span class=\"glyphicon glyphicon-ok\"></span> Выполнено</button><button class=\"del btn btn-default btn-xs\"><span class=\"glyphicon glyphicon-remove\"></span> Удалить</button></div></li>";
     }
  		return $(".js-task-list").append(a);
  
@@ -92,8 +89,8 @@ taskManager();
  
  	function clickCompletedButton(param){
  
- 		$(param).parent().addClass("completed-task");
- 		var taskNumber = $(param).parent().index();
+ 		$(param).parents("li").addClass("completed-task");
+ 		var taskNumber = $(param).parents("li").index();
  
  		taskArray[taskNumber].attribute = "completed-task";
     return taskArray;
@@ -102,9 +99,9 @@ taskManager();
   
  
  	function clickDelButton(param){
- 		
- 		taskArray.splice($(param).parent().index(), 1);
- 		$(param).parent().remove();
+ 		console.log($(param).parents("li"))
+ 		taskArray.splice($(param).parents("li").index(), 1);
+ 		$(param).parents("li").remove();
     return taskArray;
  
  	}
